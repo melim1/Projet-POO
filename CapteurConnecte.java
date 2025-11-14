@@ -1,30 +1,31 @@
-
 public abstract class CapteurConnecte {
     String id;
     String nom;
-    Boolean estAbonné;
+    Abonnement abonnement;
     double valeur;
 
     public CapteurConnecte(String id, String nom){
-        this.id=id;
-        this.nom=nom;
-        this.estAbonné=false;
-
+        this.id = id;
+        this.nom = nom;
+        this.abonnement = null;
     }
 
-    public String getId(){return id;}
-    public String getNom(){ return nom;}
-    public boolean EstAbonné(){return estAbonné;}
-    public double getValeur(){return valeur;}
+    public void setAbonnement(Abonnement a) {
+        this.abonnement = a;
+    }
+
+    public boolean estAbonne() {
+        return abonnement != null && abonnement.estValide();
+    }
+
+    public String getId() { return id; }
+    public String getNom() { return nom; }
+    public double getValeur() { return valeur; }
 
     public abstract void mesurer();
     public abstract boolean verifierAlerte();
 
-
-public String toString() {
-return id + "   " + nom + " (abonné=" + estAbonné + ")";
-}
-
-
-
+    public String toString() {
+        return id + "   " + nom + " (abonné=" + estAbonne() + ")";
+    }
 }
