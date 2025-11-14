@@ -7,6 +7,11 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+
+
+
+
 
 
 public class Hopital implements Serializable{
@@ -81,6 +86,34 @@ public class Hopital implements Serializable{
             System.out.println("Erreur lors du chargement : " + e.getMessage());
         }
     }
+
+
+public void exporterCSV(String nomFichier) {
+    try (FileWriter writer = new FileWriter(nomFichier)) {
+
+        // En-têtes CSV
+        writer.write("ID;Nom;Abonne;Valeur;Informations\n");
+
+        // Parcourir tous les capteurs
+        for (CapteurConnecte c : capteurs) {
+            writer.write(
+                c.getId() + ";" +
+                c.getNom() + ";" +
+                c.estAbonne() + ";" +
+                c.getValeur() + ";" +
+                c.toString() +
+                "\n"
+            );
+        }
+
+        writer.flush();
+        System.out.println("Fichier CSV exporté avec succès : " + nomFichier);
+
+    } catch (IOException e) {
+        System.out.println("Erreur durant l'export CSV : " + e.getMessage());
+    }
+}
+
 
 
 

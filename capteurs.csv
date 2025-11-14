@@ -1,0 +1,4 @@
+ID;Nom;Abonne;Valeur;Informations
+C885;TEST;true;70.99389884186166;C885   TEST (abonné=true) [Poids=71,0 kg]
+C405;TEST1;true;91.92166286963052;C405   TEST1 (abonné=true) [SpO2=91,9%]
+C835;TEST3;true;10.0;C835   TEST3 (abonné=true) [Doses restantes=10]

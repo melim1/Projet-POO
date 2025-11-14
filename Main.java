@@ -14,6 +14,7 @@ public class Main {
             System.out.println("2. Mesurer tous les capteurs");
             System.out.println("3. Afficher toutes les alertes");
             System.out.println("4. Afficher tous les capteurs");
+            System.out.println("5.  Exporter en CSV");
             System.out.println("0. Quitter");
             System.out.print("Votre choix : ");
             choix = sc.nextInt();
@@ -64,6 +65,10 @@ public class Main {
                 case 4:
                     hopital.afficherCapteurs();
                     break;
+                case 5:
+                    hopital.exporterCSV("capteurs.csv");
+                    break;
+    
                 case 0:
                     hopital.sauvegarder("capteurs.dat");
                     System.out.println("Au revoir !");
