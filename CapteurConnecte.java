@@ -1,4 +1,9 @@
-public abstract class CapteurConnecte {
+import java.io.Serializable;
+
+public abstract class CapteurConnecte implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     String id;
     String nom;
     Abonnement abonnement;

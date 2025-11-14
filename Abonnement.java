@@ -1,4 +1,7 @@
-public class Abonnement {
+import java.io.Serializable;
+
+public class Abonnement implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String type; // ex: "Mensuel", "Annuel"
     private String dateDebut;
     private String dateFin;

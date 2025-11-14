@@ -1,7 +1,16 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hopital {
+
+public class Hopital implements Serializable{
+    private static final long serialVersionUID = 1L;
     private List<CapteurConnecte> capteurs;
 
     public Hopital() {
@@ -51,4 +60,28 @@ public class Hopital {
             }
         }
     }
+
+     // Sauvegarder les capteurs dans un fichier
+    public void sauvegarder(String filename) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+            oos.writeObject(capteurs);
+            System.out.println("Sauvegarde effectuée !");
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la sauvegarde : " + e.getMessage());
+        }
+    }
+     // Charger les capteurs depuis un fichier
+    public void charger(String filename) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            capteurs = (List<CapteurConnecte>) ois.readObject();
+            System.out.println("Chargement effectué !");
+        } catch (FileNotFoundException e) {
+            System.out.println("Aucun fichier de sauvegarde trouvé, démarrage avec liste vide.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Erreur lors du chargement : " + e.getMessage());
+        }
+    }
+
+
+
 }

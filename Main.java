@@ -4,6 +4,8 @@ public class Main {
     public static void main(String[] args) {
         Hopital hopital = new Hopital();
         Scanner sc = new Scanner(System.in);
+         // Charger les capteurs depuis le fichier au démarrage
+        hopital.charger("capteurs.dat");
         int choix;
 
         do {
@@ -47,11 +49,13 @@ public class Main {
                         capteur.setAbonnement(abonnement);
 
                         hopital.ajouterCapteur(capteur);
+                        hopital.sauvegarder("capteurs.dat");
                     }
 
                     break;
                 case 2:
                     hopital.mesurerTousLesCapteurs();
+                    hopital.sauvegarder("capteurs.dat");
                     System.out.println("Mesures effectuées.");
                     break;
                 case 3:
@@ -61,6 +65,7 @@ public class Main {
                     hopital.afficherCapteurs();
                     break;
                 case 0:
+                    hopital.sauvegarder("capteurs.dat");
                     System.out.println("Au revoir !");
                     break;
                 default:
