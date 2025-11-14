@@ -21,7 +21,7 @@ public class Main {
 
             switch (choix) {
                 case 1:
-                    System.out.println("Type de capteur à ajouter : 1-Balance, 2-Oxymètre, 3-Pilulier, 4-Tensiomètre");
+                    System.out.println("Type de capteur à ajouter : 1-Balance, 2-Oxymètre, 3-Pilulier, 4-Tensiomètre 5-Glucometre 6-Holter_ECG");
                     int type = sc.nextInt();
                     sc.nextLine(); // consommer le retour à la ligne
                     System.out.print("Nom du capteur : ");

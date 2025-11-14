@@ -1,4 +1,8 @@
 ID;Nom;Abonne;Valeur;Informations
-C885;TEST;true;70.99389884186166;C885   TEST (abonné=true) [Poids=71,0 kg]
-C405;TEST1;true;91.92166286963052;C405   TEST1 (abonné=true) [SpO2=91,9%]
+C885;TEST;true;63.49973799882669;C885   TEST (abonné=true) [Poids=63,5 kg]
+C405;TEST1;true;90.91780226440207;C405   TEST1 (abonné=true) [SpO2=90,9%]
 C835;TEST3;true;10.0;C835   TEST3 (abonné=true) [Doses restantes=10]
+C339;souha;true;89.98422544435671;C339   souha (abonné=true) [SpO2=90,0%]
+C283;souha;true;48.90080708624187;C283   souha (abonné=true) [Poids=48,9 kg]
+C324;test2;true;0.0;C324   test2 (abonné=true) [SpO2=0,0%]
+C657;test3;true;0.0;Holter ECG [C657] - test3 | Fréquence cardiaque : 0 bpm
