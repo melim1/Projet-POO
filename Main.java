@@ -34,6 +34,9 @@ public class Main {
                         case 2: capteur = new Oxymetre(id, nom); break;
                         case 3: capteur = new Pilulier(id, nom, 10); break;
                         case 4: capteur = new Tensiometre(id, nom); break;
+                        case 5: capteur = new Glucometre(id, nom); break;
+                        case 6: capteur = new Holter_ECG(id, nom); break;
+                        
                         default: System.out.println("Type invalide."); break;
                     }
 
