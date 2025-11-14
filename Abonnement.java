@@ -1,35 +1,38 @@
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Abonnement implements Serializable {
     private static final long serialVersionUID = 1L;
     private String type; // ex: "Mensuel", "Annuel"
-    private String dateDebut;
-    private String dateFin;
-    private boolean actif;
+    private LocalDate dateDebut;
+    private LocalDate dateFin;
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public Abonnement(String type, String dateDebut, String dateFin){
+
+    public Abonnement(String type, String debut, String fin){
         this.type = type;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.actif = true;
+        this.dateDebut = LocalDate.parse(debut, FORMAT);
+        this.dateFin = LocalDate.parse(fin, FORMAT);
     }
 
     public boolean estValide(){
         // Vérifier la validité selon la date ou juste le booléen
-        return actif;
+        LocalDate aujourdHui = LocalDate.now();
+        return !aujourdHui.isAfter(dateFin);
     }
 
     public void desactiver() {
-        actif = false;
+         dateFin = LocalDate.now().minusDays(1);
     }
-    public String getType() {
-    return type;
-}
-    public String getDateDebut() {
-        return dateDebut;
-    }
-    public String getDateFin() {
-        return dateFin;
+    public String getType() { return type; }
+    public String getDateDebut() { return dateDebut.format(FORMAT); }
+    public String getDateFin() { return dateFin.format(FORMAT); }
+
+    @Override
+    public String toString() {
+        return type + " (" + getDateDebut() + " → " + getDateFin() +
+               ", actif=" + estValide() + ")";
     }
     
 }

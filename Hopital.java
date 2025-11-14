@@ -42,29 +42,74 @@ public class Hopital implements Serializable{
     }
 
     // Vérifier les alertes et afficher celles qui sont actives
-    public void afficherAlertes() {
-        boolean alerteActive = false;
-        for (CapteurConnecte c : capteurs) {
-            if (c.verifierAlerte()) {
-                System.out.println("ALERTE ! Capteur : " + c);
-                alerteActive = true;
-            }
-        }
-        if (!alerteActive) {
-            System.out.println("Aucune alerte pour le moment.");
+   public void afficherAlertes() {
+
+    System.out.println("\n==============================================");
+    System.out.println("            ⚠️  ALERTES CAPTEURS  ⚠️           ");
+    System.out.println("==============================================");
+
+    boolean alerteActive = false;
+
+    // En-tête du tableau
+    System.out.printf("%-10s | %-15s | %-10s | %-30s%n",
+            "ID", "Nom", "Valeur", "Description");
+    System.out.println("--------------------------------------------------------------------------");
+
+    for (CapteurConnecte c : capteurs) {
+        if (c.verifierAlerte()) {
+            alerteActive = true;
+
+            System.out.printf("%-10s | %-15s | %-10s | %-30s%n",
+                    c.getId(),
+                    c.getNom(),
+                    c.getValeur(),
+                    c.toString());
         }
     }
 
+    if (!alerteActive) {
+        System.out.println("Aucune alerte pour le moment.");
+    }
+
+    System.out.println("==============================================\n");
+}
+
+
     // Afficher tous les capteurs
     public void afficherCapteurs() {
-        if (capteurs.isEmpty()) {
-            System.out.println("Aucun capteur dans l'hôpital.");
-        } else {
-            for (CapteurConnecte c : capteurs) {
-                System.out.println(c);
-            }
-        }
+    if (capteurs.isEmpty()) {
+        System.out.println("Aucun capteur dans l'hôpital.");
+        return;
     }
+
+    System.out.println("\n================ LISTE DES CAPTEURS ================");
+
+    // En-têtes du tableau
+    System.out.printf("%-6s %-15s %-10s %-15s %-30s\n",
+            "ID", "Nom", "Abonné", "Valeur", "Informations");
+
+    System.out.println("---------------------------------------------------------------" +
+                       "------------------------");
+
+    // Affichage de chaque capteur
+    for (CapteurConnecte c : capteurs) {
+
+        String info = c.toString()
+                       .replace(c.getId() + "   ", "")
+                       .replace(c.getNom(), "")
+                       .replace("(abonné=" + c.estAbonne() + ")", "")
+                       .trim();
+
+        System.out.printf("%-6s %-15s %-10s %-15s %-30s\n",
+                c.getId(),
+                c.getNom(),
+                c.estAbonne() ? "Oui" : "Non",
+                String.format("%.1f", c.getValeur()),
+                info
+        );
+    }
+}
+
 
      // Sauvegarder les capteurs dans un fichier
     public void sauvegarder(String filename) {
@@ -86,6 +131,7 @@ public class Hopital implements Serializable{
             System.out.println("Erreur lors du chargement : " + e.getMessage());
         }
     }
+
 
 
 public void exporterCSV(String nomFichier) {
@@ -112,6 +158,10 @@ public void exporterCSV(String nomFichier) {
     } catch (IOException e) {
         System.out.println("Erreur durant l'export CSV : " + e.getMessage());
     }
+    
+}
+public List<CapteurConnecte> getCapteurs() {
+    return capteurs;
 }
 
 
