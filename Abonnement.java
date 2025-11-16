@@ -14,13 +14,24 @@ public class Abonnement implements Serializable {
         this.type = type;
         this.dateDebut = LocalDate.parse(debut, FORMAT);
         this.dateFin = LocalDate.parse(fin, FORMAT);
+    
     }
+    
 
     public boolean estValide(){
         // Vérifier la validité selon la date ou juste le booléen
         LocalDate aujourdHui = LocalDate.now();
         return !aujourdHui.isAfter(dateFin);
     }
+
+    private LocalDate parseDate(String dateStr) {
+    try {
+        return LocalDate.parse(dateStr, FORMAT);
+    } catch (Exception e) {
+        throw new IllegalArgumentException("❌ Date invalide : " + dateStr);
+    }
+}
+
 
     public void desactiver() {
          dateFin = LocalDate.now().minusDays(1);

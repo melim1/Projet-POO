@@ -1,3 +1,7 @@
+/*  Le Holter ECG simule une fréquence cardiaque entre 40 et 150 bpm.
+Une alerte est générée si le rythme cardiaque est inférieur à 50 bpm ou supérieur à 120.
+Cela reflète les cas de bradycardie ou tachycardie. */
+
 public class Holter_ECG extends CapteurConnecte{
      private int frequenceCardiaque; // en battements par minute (bpm)
 

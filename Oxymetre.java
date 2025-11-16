@@ -1,3 +1,6 @@
+/* L’oxymètre hérite de CapteurConnecte. Il simule une saturation en oxygène entre 88 et 100%.
+Une alerte est déclenchée sous 92%, ce qui correspond à une désaturation. */
+
 public class Oxymetre extends CapteurConnecte{
     private double spo2; // saturation en oxygène
 
@@ -11,7 +14,7 @@ public class Oxymetre extends CapteurConnecte{
     }
 
     public boolean verifierAlerte() {
-        return spo2 < 92; 
+        return spo2 < 92;  // desaturation d'oxygene
     }
     public String toString() {
     return super.toString() + String.format(" [SpO2=%.1f%%]", spo2);

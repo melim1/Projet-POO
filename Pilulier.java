@@ -1,3 +1,7 @@
+/*  Le pilulier garde en mémoire les doses restantes.
+À chaque mesure, il y a 30% de chance qu’une dose soit consommée.
+Une alerte est déclenchée lorsqu’il n’y a plus de doses, ce qui permet de notifier l’utilisateur.  */
+
 public class Pilulier extends CapteurConnecte{
 private int dosesRestantes;
   
@@ -14,7 +18,7 @@ private int dosesRestantes;
     }
 
     public boolean verifierAlerte() {
-        return dosesRestantes <= 0; 
+        return dosesRestantes <= 0;  //ya plus de doses 
     }
 
     public String toString() {
