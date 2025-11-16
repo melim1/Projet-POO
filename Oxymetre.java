@@ -11,7 +11,7 @@ public class Oxymetre extends CapteurConnecte{
     }
 
     public boolean verifierAlerte() {
-        return spo2 < 92; 
+        return spo2 < 92;  // desaturation d'oxygene
     }
     public String toString() {
     return super.toString() + String.format(" [SpO2=%.1f%%]", spo2);

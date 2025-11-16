@@ -14,7 +14,7 @@ private int dosesRestantes;
     }
 
     public boolean verifierAlerte() {
-        return dosesRestantes <= 0; 
+        return dosesRestantes <= 0;  //ya plus de doses 
     }
 
     public String toString() {

@@ -16,7 +16,7 @@ public abstract class CapteurConnecte implements Serializable {
     }
 
     public void setAbonnement(Abonnement a) {
-        this.abonnement = a;
+        this.abonnement = a;   //Permet d’associer un abonnement à un capteur.
     }
 
     public boolean estAbonne() {
@@ -27,7 +27,7 @@ public abstract class CapteurConnecte implements Serializable {
     public String getNom() { return nom; }
     public double getValeur() { return valeur; }
 
-    public abstract void mesurer();
+    public abstract void mesurer();                 // Méthodes abstraites
     public abstract boolean verifierAlerte();
 
     public String toString() {
