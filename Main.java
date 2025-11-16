@@ -77,13 +77,26 @@ public class Main {
                         String typeAbo = (typeAbonnement == 1) ? "Mensuel" : "Annuel";
 
                         // Saisie de la date de début
-                        System.out.print("Date de début de l'abonnement (dd-MM-yyyy) : ");
-                        String dateDebutStr = sc.nextLine();
+                        LocalDate dateDebut = null;
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                        LocalDate dateDebut = LocalDate.parse(dateDebutStr, formatter);
+                            while (dateDebut == null) {   
+                                System.out.print(" Date de début de l'abonnement (dd-MM-yyyy) : ");
+                                String dateDebutStr = sc.nextLine();                    
+                                LocalDate dateTemp = LocalDate.parse(dateDebutStr, formatter); // Essaie de parser
+                            try {
+                                if (dateTemp.isBefore(LocalDate.now())) {
+                                  System.out.println("La date ne peut pas être dans le passé. Veuillez saisir une date valide.");
+                                } else {
+                                     dateDebut = dateTemp; // Date valide et pas dans le passé
+                                 }}catch (Exception e) {  
+                                System.out.println(" Date invalide ! Veuillez saisir à nouveau (format dd-MM-yyyy).");   
+                            }
+                            }
                         LocalDate dateFin = (typeAbo.equals("Mensuel")) ? dateDebut.plusMonths(1) : dateDebut.plusYears(1);
-
-                        // Création de l'abonnement
+                                System.out.println("Date début : " + dateDebut);
+                                System.out.println("Date fin : " + dateFin);
+                       
+                      // Création de l'abonnement
                         Abonnement abonnement = new Abonnement(typeAbo, dateDebut.format(formatter), dateFin.format(formatter));
                         capteur.setAbonnement(abonnement);
 
