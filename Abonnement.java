@@ -45,6 +45,10 @@ public class Abonnement implements Serializable {
         return type + " (" + getDateDebut() + " → " + getDateFin() +
                ", actif=" + estValide() + ")";
     }
+    public boolean estActif() {
+    return DateUtils.estApresAujourdhui(this.dateFin);
+}
+
     
 }
 

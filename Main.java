@@ -11,6 +11,7 @@ public class Main {
         System.out.println(" 3. Gestion des alarmes");
         System.out.println(" 4. Afficher toutes les alertes");
         System.out.println(" 5. Afficher tous les capteurs");
+        System.out.println(" 6. Afficher les capteurs avec abonnement expiré");
         System.out.println(" 0. Quitter");
         System.out.println("==============================================");
         System.out.print("Votre choix : ");
@@ -64,6 +65,9 @@ public class Main {
                     System.out.println("\n================ LISTE DES CAPTEURS ================");
                     hopital.afficherCapteurs();
                     System.out.println("===================================================");
+                    break;
+                case 6:
+                    hopital.afficherCapteursExpirés();
                     break;
 
                 case 0: // Quitter

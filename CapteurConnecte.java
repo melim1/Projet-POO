@@ -21,6 +21,10 @@ public abstract class CapteurConnecte implements Serializable {
         this.nom = nom;
         this.abonnement = null;
     }
+    public Abonnement getAbonnement() {
+    return this.abonnement;
+}
+
 
     public void setAbonnement(Abonnement a) {
         this.abonnement = a;   //Permet d’associer un abonnement à un capteur.

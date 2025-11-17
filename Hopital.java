@@ -136,6 +136,23 @@ public class Hopital implements Serializable {
     public List<CapteurConnecte> getCapteurs() {
         return capteurs;
     }
+    public void afficherCapteursExpirés() {
+        boolean found = false;
+
+        for (CapteurConnecte c : capteurs) {
+            Abonnement abo = c.getAbonnement();
+
+            if (abo != null && !abo.estActif()) {
+                System.out.println("❌ " + c.getNom() + " (ID: " + c.getId() + ") - Abonnement expiré !");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("✔ Aucun abonnement expiré.");
+        }
+        
+    }
 
 
 }
