@@ -28,7 +28,7 @@ public class GestionCapteurs {
         } else if (choix == 2) {
             supprimerCapteur(sc, hopital);
         } else if (choix == 3) {
-            mesurerTousLesCapteurs(hopital, gestionAlarmes);  // MODIFIÉ - avec gestionAlarmes
+            mesurerTousLesCapteurs(hopital, gestionAlarmes); // MODIFIÉ - avec gestionAlarmes
         } else if (choix == 4) {
             rechercherCapteur(sc, hopital);
         } else if (choix == 5) {
@@ -64,7 +64,7 @@ public class GestionCapteurs {
 
         System.out.print("Nom du capteur : ");
         String nom = sc.nextLine();
-        String id = "C" + (int)(Math.random() * 1000);
+        String id = "C" + (int) (Math.random() * 1000);
 
         CapteurConnecte capteur = null;
 
@@ -96,8 +96,31 @@ public class GestionCapteurs {
             String typeAbo = (typeAbonnement == 1) ? "Mensuel" : "Annuel";
 
             System.out.print("Date de début de l'abonnement (dd-MM-yyyy) : ");
-            String dateDebutStr = sc.nextLine();
-            LocalDate dateDebut = LocalDate.parse(dateDebutStr, FORMAT);
+
+            LocalDate dateDebut = null;
+
+            while (dateDebut == null) {
+
+                String dateDebutStr = sc.nextLine();
+
+                try {
+                    dateDebut = LocalDate.parse(dateDebutStr, FORMAT);
+                    if (dateDebut.isBefore(LocalDate.now())) {
+                        System.out.println("⚠️ La date ne peut PAS être dans le passé !");
+                        dateDebut = null;
+                        continue;
+                    }
+                    // Vérifier si date dans le futur
+                    if (dateDebut.isAfter(LocalDate.now())) {
+                        System.out.println("⚠️ La date ne peut pas être dans le futur !");
+                        dateDebut = null;
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("⚠️ Date invalide ! Utilise le format dd-MM-yyyy.");
+                }
+            }
+
             LocalDate dateFin = (typeAbo.equals("Mensuel")) ? dateDebut.plusMonths(1) : dateDebut.plusYears(1);
 
             Abonnement abonnement = new Abonnement(typeAbo, dateDebut.format(FORMAT), dateFin.format(FORMAT));
