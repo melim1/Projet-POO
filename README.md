@@ -36,9 +36,9 @@ Ce projet simule un **système d’hôpital intelligent** capable de gérer diff
 Ce projet a pour but de simuler un environnement hospitalier connecté, permettant de **surveiller en temps réel l’état de santé des patients** via des capteurs, tout en offrant une **gestion simplifiée des alertes et abonnements**.
 
 
-# 📌 **Description des classes du projet**
+#  **Description des classes du projet**
 
-## 🔷 **1. CapteurConnecte (classe abstraite parente)**
+##  **1. CapteurConnecte (classe abstraite parente)**
 
 C’est la classe **mère** de tous les capteurs.
 Elle contient les éléments communs :
@@ -57,11 +57,11 @@ Elle contient les éléments communs :
 * `verifierAlerte()` → vérifie si une alerte doit être déclenchée
 * `setAbonnement()`, `estAbonne()`, `getId()`, `getNom()`, `getValeur()`
 
-👉 **But :** Servir de modèle commun pour tous les capteurs.
+ **But :** Servir de modèle commun pour tous les capteurs.
 
 ---
 
-## 🔷 **2. Pilulier**
+## **2. Pilulier**
 
 Simule un pilulier qui suit le nombre de doses restantes.
 
@@ -71,11 +71,11 @@ Simule un pilulier qui suit le nombre de doses restantes.
 * À chaque mesure : **30% de chance qu’une dose soit consommée**.
 * Déclenche une alerte quand `dosesRestantes == 0`.
 
-👉 **Utilité :** Prévenir lorsque le patient n’a plus de médicament.
+ **Utilité :** Prévenir lorsque le patient n’a plus de médicament.
 
 ---
 
-## 🔷 **3. Tensiometre**
+## **3. Tensiometre**
 
 Simule une mesure de tension artérielle.
 
@@ -90,11 +90,11 @@ Simule une mesure de tension artérielle.
 * ou Diastolique > 90
   → **Hypertension**
 
-👉 **Utilité :** Détecter des tensions dangereusement élevées.
+ **Utilité :** Détecter des tensions dangereusement élevées.
 
 ---
 
-## 🔷 **4. Oxymetre**
+##  **4. Oxymetre**
 
 Mesure artificiellement la saturation en oxygène (SpO2).
 
@@ -107,11 +107,11 @@ Mesure artificiellement la saturation en oxygène (SpO2).
 * SpO2 < 92 %
   → **Désaturation**
 
-👉 **Utilité :** Surveiller l’oxygénation d’un patient.
+ **Utilité :** Surveiller l’oxygénation d’un patient.
 
 ---
 
-## 🔷 **5. Holter_ECG**
+##  **5. Holter_ECG**
 
 Simule des battements cardiaques.
 
@@ -124,11 +124,11 @@ Simule des battements cardiaques.
 * < 50 bpm → **Bradycardie**
 * > 120 bpm → **Tachycardie**
 
-👉 **Utilité :** Détecter des rythmes cardiaques anormaux.
+ **Utilité :** Détecter des rythmes cardiaques anormaux.
 
 ---
 
-## 🔷 **6. Glucometre**
+## **6. Glucometre**
 
 Simule une mesure de glycémie.
 
@@ -141,11 +141,11 @@ Simule une mesure de glycémie.
 * < 0.70 g/L → Hypoglycémie
 * > 1.80 g/L → Hyperglycémie
 
-👉 **Utilité :** Surveiller les risques liés au diabète.
+ **Utilité :** Surveiller les risques liés au diabète.
 
 ---
 
-## 🔷 **7. Abonnement**
+##  **7. Abonnement**
 
 Représente un abonnement (mensuel ou annuel) associé à un capteur.
 
@@ -156,11 +156,11 @@ Représente un abonnement (mensuel ou annuel) associé à un capteur.
 * `dateFin`
 * Vérification que la date n’est pas dans le passé
 
-👉 **Utilité :** Permet d’activer les alertes et le suivi du capteur.
+ **Utilité :** Permet d’activer les alertes et le suivi du capteur.
 
 ---
 
-## 🔷 **8. Hopital**
+##  **8. Hopital**
 
 Gère **tous les capteurs** installés.
 
@@ -174,11 +174,11 @@ Gère **tous les capteurs** installés.
 * Afficher la liste des capteurs
 * Statistiques (abonnés, alertes, etc.)
 
-👉 **Utilité :** C’est le **système central** de gestion des capteurs.
+ **Utilité :** C’est le **système central** de gestion des capteurs.
 
 ---
 
-## 🔷 **9. GestionCapteurs**
+##  **9. GestionCapteurs**
 
 Gère toutes les **interactions utilisateur** via un menu.
 
@@ -193,11 +193,11 @@ Gère toutes les **interactions utilisateur** via un menu.
 * Mesurer tous les capteurs
 * Afficher statistiques
 
-👉 **Utilité :** Interface console pour manipuler les capteurs.
+ **Utilité :** Interface console pour manipuler les capteurs.
 
 ---
 
-## 🔷 **10. GestionAlarmes**
+##  **10. GestionAlarmes**
 
 Gère l’historique des alarmes.
 
@@ -209,7 +209,7 @@ Gère l’historique des alarmes.
 * Marquer une alarme comme traitée
 * Exporter en CSV
 
-👉 **Utilité :** Assure le suivi des problèmes détectés par les capteurs.
+ **Utilité :** Assure le suivi des problèmes détectés par les capteurs.
 
 
 
