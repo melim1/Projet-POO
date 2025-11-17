@@ -1,22 +1,215 @@
 
-# ProjetPOO
 
- on a **une classe parente abstraite** appelée `CapteurConnecte`. Cette classe définit les **attributs communs** à tous les capteurs, comme :
 
-* `id` et `nom` pour identifier le capteur,
-* `estAbonne` pour savoir si l’utilisateur est abonné au suivi du capteur,
-* `valeur` qui stocke la dernière mesure.
+# Hôpital Intelligent - Gestion des Capteurs Connectés
 
-Elle définit aussi des **méthodes communes** :
+Ce projet simule un **système d’hôpital intelligent** capable de gérer différents capteurs médicaux connectés, suivre les abonnements associés et générer automatiquement des alertes en cas de valeurs anormales.
 
-* pour récupérer les informations (`getId()`, `getNom()`, `getValeur()`, etc.),
-* et deux méthodes abstraites `mesurer()` et `verifierAlerte()` que chaque capteur devra **implémenter spécifiquement**.
+## Fonctionnalités principales
 
-Ensuite, il y a **des classes enfants** qui héritent de `CapteurConnecte` :
+* **Gestion des capteurs** :
+  Ajout, suppression, modification et mesure de différents capteurs :
 
-1. **Tensiometre** : mesure la tension systolique et diastolique, avec une alerte si la tension est trop haute.
-2. **Oxymetre** : mesure la saturation en oxygène, avec alerte si SpO2 < 92%.
-3. **Balance** : mesure le poids, avec alerte si le poids est trop bas ou trop élevé.
-4. **Pilulier** : suit le nombre de doses restantes, avec alerte si  plus de doses.
+  * Pilulier (gestion des doses médicamenteuses)
+  * Tensiomètre (tension artérielle)
+  * Oxymètre (saturation en oxygène)
+  * Holter ECG (fréquence cardiaque)
+  * Glucomètre (glycémie)
+  * Balance (poids)
 
-Chaque classe enfant **implémente ses propres méthodes `mesurer()` et `verifierAlerte()`** selon le type de capteur, mais hérite des fonctionnalités communes de la classe parente.
+* **Alertes automatiques** :
+  Chaque capteur déclenche une alerte si ses valeurs dépassent un seuil critique. Les alertes sont historisées et peuvent être marquées comme traitées.
+
+* **Gestion des abonnements** :
+  Chaque capteur peut être lié à un abonnement (mensuel ou annuel), avec possibilité de renouveler ou désactiver un abonnement.
+
+* **Export et sauvegarde** :
+
+  * Sauvegarde des données de capteurs et d’alertes sur fichiers (`.dat`)
+  * Export au format CSV pour une consultation ou analyse externe
+
+* **Interface console** :
+  Menu interactif pour gérer facilement les capteurs, abonnements et alertes.
+
+## Objectif du projet
+
+Ce projet a pour but de simuler un environnement hospitalier connecté, permettant de **surveiller en temps réel l’état de santé des patients** via des capteurs, tout en offrant une **gestion simplifiée des alertes et abonnements**.
+
+
+# 📌 **Description des classes du projet**
+
+## 🔷 **1. CapteurConnecte (classe abstraite parente)**
+
+C’est la classe **mère** de tous les capteurs.
+Elle contient les éléments communs :
+
+### Attributs communs :
+
+* `id` → identifiant unique du capteur
+* `nom` → nom du capteur
+* `valeur` → dernière mesure
+* `estAbonne` → indique si l’utilisateur reçoit des alertes
+* `abonnement` → objet Abonnement lié au capteur
+
+### Méthodes :
+
+* `mesurer()` → sera redéfinie par chaque capteur
+* `verifierAlerte()` → vérifie si une alerte doit être déclenchée
+* `setAbonnement()`, `estAbonne()`, `getId()`, `getNom()`, `getValeur()`
+
+👉 **But :** Servir de modèle commun pour tous les capteurs.
+
+---
+
+## 🔷 **2. Pilulier**
+
+Simule un pilulier qui suit le nombre de doses restantes.
+
+### Fonctionnement :
+
+* Commence avec un nombre de doses initiales.
+* À chaque mesure : **30% de chance qu’une dose soit consommée**.
+* Déclenche une alerte quand `dosesRestantes == 0`.
+
+👉 **Utilité :** Prévenir lorsque le patient n’a plus de médicament.
+
+---
+
+## 🔷 **3. Tensiometre**
+
+Simule une mesure de tension artérielle.
+
+### Génération :
+
+* Systolique : entre **90 et 160**
+* Diastolique : entre **50 et 100**
+
+### Conditions d’alerte :
+
+* Systolique > 140
+* ou Diastolique > 90
+  → **Hypertension**
+
+👉 **Utilité :** Détecter des tensions dangereusement élevées.
+
+---
+
+## 🔷 **4. Oxymetre**
+
+Mesure artificiellement la saturation en oxygène (SpO2).
+
+### Génération :
+
+* Valeur entre **88% et 100%**
+
+### Condition d’alerte :
+
+* SpO2 < 92 %
+  → **Désaturation**
+
+👉 **Utilité :** Surveiller l’oxygénation d’un patient.
+
+---
+
+## 🔷 **5. Holter_ECG**
+
+Simule des battements cardiaques.
+
+### Génération :
+
+* Fréquence cardiaque entre **40 et 150 bpm**
+
+### Alertes :
+
+* < 50 bpm → **Bradycardie**
+* > 120 bpm → **Tachycardie**
+
+👉 **Utilité :** Détecter des rythmes cardiaques anormaux.
+
+---
+
+## 🔷 **6. Glucometre**
+
+Simule une mesure de glycémie.
+
+### Génération :
+
+* Glycémie entre **0.60 g/L et 2.20 g/L**
+
+### Conditions d’alerte :
+
+* < 0.70 g/L → Hypoglycémie
+* > 1.80 g/L → Hyperglycémie
+
+👉 **Utilité :** Surveiller les risques liés au diabète.
+
+---
+
+## 🔷 **7. Abonnement**
+
+Représente un abonnement (mensuel ou annuel) associé à un capteur.
+
+### Attributs :
+
+* `type` → Mensuel ou Annuel
+* `dateDebut`
+* `dateFin`
+* Vérification que la date n’est pas dans le passé
+
+👉 **Utilité :** Permet d’activer les alertes et le suivi du capteur.
+
+---
+
+## 🔷 **8. Hopital**
+
+Gère **tous les capteurs** installés.
+
+### Responsabilités :
+
+* Ajouter ou supprimer un capteur
+* Mesurer tous les capteurs
+* Afficher les alertes actives
+* Sauvegarder/charger les capteurs (fichier `.dat`)
+* Exporter en CSV
+* Afficher la liste des capteurs
+* Statistiques (abonnés, alertes, etc.)
+
+👉 **Utilité :** C’est le **système central** de gestion des capteurs.
+
+---
+
+## 🔷 **9. GestionCapteurs**
+
+Gère toutes les **interactions utilisateur** via un menu.
+
+### Permet :
+
+* Ajouter un capteur
+* Supprimer
+* Modifier
+* Filtrer par type
+* Rechercher
+* Afficher les non abonnés
+* Mesurer tous les capteurs
+* Afficher statistiques
+
+👉 **Utilité :** Interface console pour manipuler les capteurs.
+
+---
+
+## 🔷 **10. GestionAlarmes**
+
+Gère l’historique des alarmes.
+
+### Fonctionnalités :
+
+* Créer une alarme si un capteur dépasse les seuils
+* Afficher toutes les alarmes
+* Filtrer les alarmes non traitées
+* Marquer une alarme comme traitée
+* Exporter en CSV
+
+👉 **Utilité :** Assure le suivi des problèmes détectés par les capteurs.
+
+
+
