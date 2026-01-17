@@ -91,3 +91,6 @@ nb-configuration.xml
 
 # Fichiers de données sérialisées (NE PAS PUSH)
 *.dat
+capteurs.dat
+*.ser
+
