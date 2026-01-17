@@ -1,4 +1,4 @@
-/* Le glucomètre hérite de CapteurConnecte et simule une valeur de glycémie entre 0.6 et 2.2.
+package modele;/* Le glucomètre hérite de modele.CapteurConnecte et simule une valeur de glycémie entre 0.6 et 2.2.
 Il génère une alerte si la glycémie est en dessous de 0.70 ou au-dessus de 1.80.
 */
 

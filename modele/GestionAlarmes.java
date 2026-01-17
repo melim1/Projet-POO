@@ -1,3 +1,5 @@
+package modele;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +138,7 @@ public class GestionAlarmes implements Serializable {
         if (choix > 0 && choix <= nonTraitees.size()) {
             nonTraitees.get(choix - 1).marquerTraitee();
             sauvegarder();
-            System.out.println("✓ Alarme marquée comme traitée !");
+            System.out.println("✓ modele.Alarme marquée comme traitée !");
         } else if (choix != 0) {
             System.out.println("Numéro invalide !");
         }

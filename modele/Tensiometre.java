@@ -1,4 +1,4 @@
- /* Le tensiomètre génère deux valeurs : systolique et diastolique.
+package modele; /* Le tensiomètre génère deux valeurs : systolique et diastolique.
 Une alerte apparaît si la tension dépasse 140/90, ce qui correspond à une hypertension. */
 
 

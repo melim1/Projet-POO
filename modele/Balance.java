@@ -1,4 +1,4 @@
-
+package modele;
 
 public class Balance extends CapteurConnecte {
     private double poids;

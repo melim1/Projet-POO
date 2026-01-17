@@ -10,12 +10,12 @@ Ce projet simule un **système d’hôpital intelligent** capable de gérer diff
 * **Gestion des capteurs** :
   Ajout, suppression, modification et mesure de différents capteurs :
 
-  * Pilulier (gestion des doses médicamenteuses)
+  * modele.Pilulier (gestion des doses médicamenteuses)
   * Tensiomètre (tension artérielle)
   * Oxymètre (saturation en oxygène)
   * Holter ECG (fréquence cardiaque)
   * Glucomètre (glycémie)
-  * Balance (poids)
+  * modele.Balance (poids)
 
 * **Alertes automatiques** :
   Chaque capteur déclenche une alerte si ses valeurs dépassent un seuil critique. Les alertes sont historisées et peuvent être marquées comme traitées.
@@ -38,7 +38,7 @@ Ce projet a pour but de simuler un environnement hospitalier connecté, permetta
 
 #  **Description des classes du projet**
 
-##  **1. CapteurConnecte (classe abstraite parente)**
+##  **1. modele.CapteurConnecte (classe abstraite parente)**
 
 C’est la classe **mère** de tous les capteurs.
 Elle contient les éléments communs :
@@ -49,7 +49,7 @@ Elle contient les éléments communs :
 * `nom` → nom du capteur
 * `valeur` → dernière mesure
 * `estAbonne` → indique si l’utilisateur reçoit des alertes
-* `abonnement` → objet Abonnement lié au capteur
+* `abonnement` → objet modele.Abonnement lié au capteur
 
 ### Méthodes :
 
@@ -61,7 +61,7 @@ Elle contient les éléments communs :
 
 ---
 
-## **2. Pilulier**
+## **2. modele.Pilulier**
 
 Simule un pilulier qui suit le nombre de doses restantes.
 
@@ -75,7 +75,7 @@ Simule un pilulier qui suit le nombre de doses restantes.
 
 ---
 
-## **3. Tensiometre**
+## **3. modele.Tensiometre**
 
 Simule une mesure de tension artérielle.
 
@@ -94,7 +94,7 @@ Simule une mesure de tension artérielle.
 
 ---
 
-##  **4. Oxymetre**
+##  **4. modele.Oxymetre**
 
 Mesure artificiellement la saturation en oxygène (SpO2).
 
@@ -111,7 +111,7 @@ Mesure artificiellement la saturation en oxygène (SpO2).
 
 ---
 
-##  **5. Holter_ECG**
+##  **5. modele.Holter_ECG**
 
 Simule des battements cardiaques.
 
@@ -128,7 +128,7 @@ Simule des battements cardiaques.
 
 ---
 
-## **6. Glucometre**
+## **6. modele.Glucometre**
 
 Simule une mesure de glycémie.
 
@@ -145,7 +145,7 @@ Simule une mesure de glycémie.
 
 ---
 
-##  **7. Abonnement**
+##  **7. modele.Abonnement**
 
 Représente un abonnement (mensuel ou annuel) associé à un capteur.
 
@@ -160,7 +160,7 @@ Représente un abonnement (mensuel ou annuel) associé à un capteur.
 
 ---
 
-##  **8. Hopital**
+##  **8. modele.Hopital**
 
 Gère **tous les capteurs** installés.
 
@@ -178,7 +178,7 @@ Gère **tous les capteurs** installés.
 
 ---
 
-##  **9. GestionCapteurs**
+##  **9. modele.GestionCapteurs**
 
 Gère toutes les **interactions utilisateur** via un menu.
 
@@ -197,7 +197,7 @@ Gère toutes les **interactions utilisateur** via un menu.
 
 ---
 
-##  **10. GestionAlarmes**
+##  **10. modele.GestionAlarmes**
 
 Gère l’historique des alarmes.
 

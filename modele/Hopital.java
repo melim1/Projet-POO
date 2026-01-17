@@ -1,3 +1,5 @@
+package modele;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -143,7 +145,7 @@ public class Hopital implements Serializable {
             Abonnement abo = c.getAbonnement();
 
             if (abo != null && !abo.estActif()) {
-                System.out.println("❌ " + c.getNom() + " (ID: " + c.getId() + ") - Abonnement expiré !");
+                System.out.println("❌ " + c.getNom() + " (ID: " + c.getId() + ") - modele.Abonnement expiré !");
                 found = true;
             }
         }
@@ -153,6 +155,15 @@ public class Hopital implements Serializable {
         }
         
     }
+    public CapteurConnecte rechercherCapteurParID(String id) {
+        for (CapteurConnecte c : capteurs) { // capteurs = ta liste de capteurs
+            if (c.getId().equals(id)) {
+                return c;
+            }
+        }
+        return null; // pas trouvé
+    }
+
 
 
 }

@@ -1,4 +1,4 @@
-/*  CapteurConnecte est la classe mère de tous les capteurs.
+package modele;/*  modele.CapteurConnecte est la classe mère de tous les capteurs.
 Elle centralise les attributs communs : identifiant, nom, abonnement et valeur mesurée.
 C’est une classe abstraite, ce qui oblige chaque capteur spécifique à redéfinir sa manière de mesurer et de détecter une alerte.
 J’ai aussi ajouté la sérialisation pour pouvoir sauvegarder l’état des capteurs dans un fichier.
@@ -37,6 +37,7 @@ public abstract class CapteurConnecte implements Serializable {
     public String getId() { return id; }
     public String getNom() { return nom; }
     public double getValeur() { return valeur; }
+    public void setNom(String nom){this.nom = nom;}
 
     public abstract void mesurer();                 // Méthodes abstraites
     public abstract boolean verifierAlerte();

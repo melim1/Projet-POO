@@ -1,3 +1,6 @@
+package modele;
+
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -45,6 +48,33 @@ public class GestionAbonnement {
                 System.out.println("Actif: " + (c.abonnement.estValide() ? "Oui" : "Non"));
                 System.out.println("-------------------------------------------");
             }
+        }
+    }
+    //afficher pour SWING
+    public static void afficherAbonnementsSwing(Hopital hopital) {
+
+        StringBuilder sb = new StringBuilder();
+        boolean trouve = false;
+
+        for (CapteurConnecte c : hopital.getCapteurs()) {
+            if (c.getAbonnement() != null) {
+                Abonnement a = c.getAbonnement();
+                sb.append("ID: ").append(c.getId()).append("\n")
+                        .append("Nom: ").append(c.getNom()).append("\n")
+                        .append("Type: ").append(a.getType()).append("\n")
+                        .append("Début: ").append(a.getDateDebut()).append("\n")
+                        .append("Fin: ").append(a.getDateFin()).append("\n")
+                        .append("Actif: ").append(a.estValide() ? "Oui" : "Non").append("\n")
+                        .append("----------------------------\n");
+                trouve = true;
+            }
+        }
+
+        if (!trouve) {
+            JOptionPane.showMessageDialog(null, "Aucun abonnement trouvé.");
+        } else {
+            JOptionPane.showMessageDialog(null, sb.toString(), "Abonnements",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -100,8 +130,52 @@ public class GestionAbonnement {
         capteur.setAbonnement(nouveauAbo);
         hopital.sauvegarder("capteurs.dat");
 
-        System.out.println("✓ Abonnement renouvelé jusqu'au : " + nouveauAbo.getDateFin());
+        System.out.println("✓ modele.Abonnement renouvelé jusqu'au : " + nouveauAbo.getDateFin());
     }
+    //renouvler pour SWING
+    public static void renouvelerAbonnementSwing(Hopital hopital) {
+
+        String id = JOptionPane.showInputDialog(null, "ID du capteur ?");
+        if (id == null || id.isEmpty()) return;
+
+        CapteurConnecte capteur = hopital.rechercherCapteurParID(id);
+
+        if (capteur == null || capteur.getAbonnement() == null) {
+            JOptionPane.showMessageDialog(null, "Capteur ou abonnement introuvable !");
+            return;
+        }
+
+        String[] types = {"Mensuel", "Annuel"};
+        String typeChoisi = (String) JOptionPane.showInputDialog(
+                null,
+                "Type d'abonnement :",
+                "Renouvellement",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                types,
+                types[0]
+        );
+
+        if (typeChoisi == null) return;
+
+        LocalDate debut = LocalDate.now();
+        LocalDate fin = typeChoisi.equals("Mensuel")
+                ? debut.plusMonths(1)
+                : debut.plusYears(1);
+
+        Abonnement nouveau = new Abonnement(
+                typeChoisi,
+                debut.format(FORMAT),
+                fin.format(FORMAT)
+        );
+
+        capteur.setAbonnement(nouveau);
+        hopital.sauvegarder("capteurs.dat");
+
+        JOptionPane.showMessageDialog(null,
+                "Abonnement renouvelé jusqu'au : " + nouveau.getDateFin());
+    }
+
 
     // Désactiver un abonnement
     private static void desactiverAbonnement(Scanner sc, Hopital hopital) {
@@ -126,6 +200,33 @@ public class GestionAbonnement {
         // Désactiver
         capteur.abonnement.desactiver();
         hopital.sauvegarder("capteurs.dat");
-        System.out.println("✓ Abonnement désactivé !");
+        System.out.println("✓ modele.Abonnement désactivé !");
     }
+    //desactiver pour SWING
+    public static void desactiverAbonnementSwing(Hopital hopital) {
+
+        String id = JOptionPane.showInputDialog(null, "ID du capteur ?");
+        if (id == null || id.isEmpty()) return;
+
+        CapteurConnecte capteur = hopital.rechercherCapteurParID(id);
+
+        if (capteur == null || capteur.getAbonnement() == null) {
+            JOptionPane.showMessageDialog(null, "Capteur ou abonnement introuvable !");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(
+                null,
+                "Désactiver l'abonnement du capteur " + capteur.getNom() + " ?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            capteur.getAbonnement().desactiver();
+            hopital.sauvegarder("capteurs.dat");
+            JOptionPane.showMessageDialog(null, "Abonnement désactivé !");
+        }
+    }
+
 }

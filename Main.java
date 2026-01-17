@@ -1,8 +1,12 @@
+
+import ui.MainFrame;
+
+import javax.swing.*;
 import java.util.Scanner;
 
 public class Main {
 
-    private static void afficherMenu() {
+   /* private static void afficherMenu() {
         System.out.println("\n==============================================");
         System.out.println("           MENU - HÔPITAL INTELLIGENT         ");
         System.out.println("==============================================");
@@ -18,8 +22,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Hopital hopital = new Hopital();
-        GestionAlarmes gestionAlarmes = new GestionAlarmes();
+        modele.Hopital hopital = new modele.Hopital();
+        modele.GestionAlarmes gestionAlarmes = new modele.GestionAlarmes();
         Scanner sc = new Scanner(System.in);
 
         hopital.charger("capteurs.dat");
@@ -40,15 +44,15 @@ public class Main {
 
             switch (choix) {
                 case 1: // Gestion des capteurs
-                    GestionCapteurs.afficherMenuGestionCapteurs(sc, hopital, gestionAlarmes);
+                    modele.GestionCapteurs.afficherMenuGestionCapteurs(sc, hopital, gestionAlarmes);
                     break;
 
                 case 2: // Gestion des abonnements
-                    GestionAbonnement.afficherMenuAbonnements(sc, hopital);
+                    modele.GestionAbonnement.afficherMenuAbonnements(sc, hopital);
                     break;
 
                 case 3: // Gestion des alarmes - SIMPLIFIÉ
-                    GestionAlarmes.afficherMenuAlarmes(sc, gestionAlarmes);
+                    modele.GestionAlarmes.afficherMenuAlarmes(sc, gestionAlarmes);
                     break;
 
                 case 4: // Afficher alertes + CRÉER ALARMES
@@ -82,5 +86,11 @@ public class Main {
         } while (choix != 0);
 
         sc.close();
+
+    }*/
+    public static void main(String[] args){
+        SwingUtilities.invokeLater(() -> {
+            new MainFrame();
+        });
     }
 }

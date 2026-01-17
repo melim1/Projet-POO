@@ -1,7 +1,7 @@
-/* L’oxymètre hérite de CapteurConnecte. Il simule une saturation en oxygène entre 88 et 100%.
+package modele;/* L’oxymètre hérite de modele.CapteurConnecte. Il simule une saturation en oxygène entre 88 et 100%.
 Une alerte est déclenchée sous 92%, ce qui correspond à une désaturation. */
 
-public class Oxymetre extends CapteurConnecte{
+public class Oxymetre extends CapteurConnecte {
     private double spo2; // saturation en oxygène
 
     public Oxymetre(String id, String nom) {    
