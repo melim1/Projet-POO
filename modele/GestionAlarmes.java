@@ -17,8 +17,8 @@ public class GestionAlarmes implements Serializable {
     public static void afficherMenuAlarmes(Scanner sc, GestionAlarmes gestionAlarmes) {
         System.out.println("\n========== GESTION DES ALARMES ==========");
         System.out.println(" 1. Afficher toutes les alarmes");
-        System.out.println(" 2. Afficher les alarmes non traitées");  // AJOUTÉ
-        System.out.println(" 3. Marquer une alarme comme traitée");    // AJOUTÉ
+        System.out.println(" 2. Afficher les alarmes non traitées"); // AJOUTÉ
+        System.out.println(" 3. Marquer une alarme comme traitée"); // AJOUTÉ
         System.out.println(" 4. Exporter les alarmes en CSV");
         System.out.println(" 0. Retour au menu principal");
         System.out.println("=========================================");
@@ -30,9 +30,9 @@ public class GestionAlarmes implements Serializable {
         if (choix == 1) {
             gestionAlarmes.afficherHistorique();
         } else if (choix == 2) {
-            gestionAlarmes.afficherAlarmesNonTraitees();  // AJOUTÉ
+            gestionAlarmes.afficherAlarmesNonTraitees(); // AJOUTÉ
         } else if (choix == 3) {
-            gestionAlarmes.marquerTraitee(sc);            // AJOUTÉ
+            gestionAlarmes.marquerTraitee(sc); // AJOUTÉ
         } else if (choix == 4) {
             gestionAlarmes.exporterAlarmesCSV();
         } else if (choix == 0) {
@@ -91,6 +91,10 @@ public class GestionAlarmes implements Serializable {
         System.out.println("============================================\n");
     }
 
+    public List<Alarme> getHistorique() {
+        return historique;
+    }
+
     // ========== AFFICHER ALARMES NON TRAITÉES ========== (NOUVEAU)
     private void afficherAlarmesNonTraitees() {
         System.out.println("\n====== ALARMES NON TRAITÉES ======");
@@ -107,6 +111,13 @@ public class GestionAlarmes implements Serializable {
             System.out.println("✓ Aucune alarme non traitée.");
         }
         System.out.println("==================================\n");
+    }
+
+    // Retourne toutes les alarmes non traitées
+    public List<Alarme> getAlarmesNonTraitees() {
+        return historique.stream()
+                .filter(a -> !a.estTraitee())
+                .toList();
     }
 
     // ========== MARQUER COMME TRAITÉE ========== (NOUVEAU)
@@ -145,7 +156,7 @@ public class GestionAlarmes implements Serializable {
     }
 
     // ========== EXPORTER EN CSV ==========
-    private void exporterAlarmesCSV() {
+    public void exporterAlarmesCSV() {
         try (FileWriter writer = new FileWriter("alarmes.csv")) {
             writer.write("DateHeure;IDCapteur;NomCapteur;TypeAlarme;Valeur;Traitee\n");
 
@@ -153,7 +164,7 @@ public class GestionAlarmes implements Serializable {
                 writer.write(String.format("%s;%s;%s;%s;%.2f;%s\n",
                         a.getDateHeure(), a.getIdCapteur(), a.getNomCapteur(),
                         a.getTypeAlarme(), a.getValeur(),
-                        a.estTraitee() ? "Oui" : "Non"));  // MODIFIÉ
+                        a.estTraitee() ? "Oui" : "Non")); // MODIFIÉ
             }
 
             writer.flush();

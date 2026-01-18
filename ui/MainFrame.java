@@ -9,7 +9,8 @@ public class MainFrame extends JFrame {
     private Hopital hopital;
     private GestionAlarmes gestionAlarmes;
     private CapteurConnecte capteurConnecte;
-    public MainFrame(){
+
+    public MainFrame() {
         hopital = new Hopital();
         gestionAlarmes = new GestionAlarmes();
 
@@ -17,25 +18,25 @@ public class MainFrame extends JFrame {
         gestionAlarmes.charger();
 
         setTitle("modele.Hopital Intelligent");
-        setSize(700,700);
+        setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
 
-        //Ajouter le titre du menu
+        // Ajouter le titre du menu
         JLabel titre = new JLabel("MENU - HOPITAL INTELLIGENT", SwingConstants.CENTER);
         titre.setFont(new java.awt.Font("Arial", Font.BOLD, 18));
         setLayout(new java.awt.BorderLayout());
         add(titre, BorderLayout.NORTH);
 
-        //Ajouter les boutton
+        // Ajouter les boutton
         JPanel panelBouttons = new JPanel();
-        panelBouttons.setLayout(new java.awt.GridLayout(3,3,10,10));
+        panelBouttons.setLayout(new java.awt.GridLayout(3, 3, 10, 10));
         JButton btnCapteur = new JButton("Gestion des capteurs");
-        JButton btnAbonnements = new JButton ("Gestion des abonnements");
-        JButton btnAlarme = new JButton ("Gestion des alarmes");
-        JButton btnTousCapteur = new JButton ("Afficher tous les capteurs");
-        JButton btnExpires = new JButton ("Capteurs expirés");
+        JButton btnAbonnements = new JButton("Gestion des abonnements");
+        JButton btnAlarme = new JButton("Gestion des alarmes");
+        JButton btnTousCapteur = new JButton("Afficher tous les capteurs");
+        JButton btnExpires = new JButton("Capteurs expirés");
         JButton btnQuitter = new JButton("Quitter");
         JButton btnAlerte = new JButton("Gestion des alertes");
         panelBouttons.add(btnCapteur);
@@ -51,18 +52,20 @@ public class MainFrame extends JFrame {
             hopital.afficherCapteurs();
         });
 
-       btnCapteur.addActionListener( e -> {
-           new GestionCapteurui(hopital);
-       });
-        btnAbonnements.addActionListener( e -> {
+        btnCapteur.addActionListener(e -> {
+            new GestionCapteurui(hopital);
+        });
+        btnAbonnements.addActionListener(e -> {
             new GestionAbonnementui(hopital);
         });
+        btnAlarme.addActionListener(e -> {
+            new GestionAlarmesui(hopital, gestionAlarmes);
+        });
 
-
-
-
-
-
+        btnTousCapteur.addActionListener(e -> {
+            new AfficherCapteursui(hopital);
+        });
 
     }
+
 }
