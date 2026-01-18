@@ -192,6 +192,40 @@ public class GestionCapteurs {
             JOptionPane.showMessageDialog(null, "Capteur supprimé avec succès !");
         }
     }
+    // ===== AFFICHER LES ALERTES EN TEMPS RÉEL (SWING) =====
+    public static void afficherAlertesSwing(Hopital hopital) {
+
+        StringBuilder alertes = new StringBuilder();
+        boolean existeAlerte = false;
+
+        for (CapteurConnecte c : hopital.getCapteurs()) {
+            if (c.verifierAlerte()) {
+                existeAlerte = true;
+                alertes.append("⚠️ ")
+                        .append(c.getNom())
+                        .append(" (ID: ")
+                        .append(c.getId())
+                        .append(")\n");
+            }
+        }
+
+        if (existeAlerte) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    alertes.toString(),
+                    "ALERTES EN COURS",
+                    JOptionPane.WARNING_MESSAGE
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "✓ Aucune alerte détectée",
+                    "Alertes",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }
+    }
+
 
     // ===== MESURER TOUS LES CAPTEURS ===== (UNE SEULE VERSION)
     private static void mesurerTousLesCapteurs(Hopital hopital, GestionAlarmes gestionAlarmes) {
@@ -236,6 +270,7 @@ public class GestionCapteurs {
 
         // 1️⃣ Mesure
         hopital.mesurerTousLesCapteurs();
+        afficherAlertesSwing(hopital);
 
         // 2️⃣ Création des alarmes
         gestionAlarmes.verifierEtCreerAlarmes(hopital);
@@ -581,4 +616,5 @@ public class GestionCapteurs {
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
+
 }

@@ -38,11 +38,11 @@ public class MainFrame extends JFrame {
         JButton btnTousCapteur = new JButton("Afficher tous les capteurs");
         JButton btnExpires = new JButton("Capteurs expirés");
         JButton btnQuitter = new JButton("Quitter");
-        JButton btnAlerte = new JButton("Gestion des alertes");
+
         panelBouttons.add(btnCapteur);
         panelBouttons.add(btnAbonnements);
         panelBouttons.add(btnAlarme);
-        panelBouttons.add(btnAlerte);
+
         panelBouttons.add(btnTousCapteur);
         panelBouttons.add(btnExpires);
         panelBouttons.add(btnQuitter);
@@ -51,6 +51,7 @@ public class MainFrame extends JFrame {
         btnTousCapteur.addActionListener(e -> {
             hopital.afficherCapteurs();
         });
+
 
         btnCapteur.addActionListener(e -> {
             new GestionCapteurui(hopital);

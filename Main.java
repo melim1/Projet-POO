@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-   /* private static void afficherMenu() {
+   /*private static void afficherMenu() {
         System.out.println("\n==============================================");
         System.out.println("           MENU - HÔPITAL INTELLIGENT         ");
         System.out.println("==============================================");
