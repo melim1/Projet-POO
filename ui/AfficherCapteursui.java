@@ -3,6 +3,7 @@ package ui;
 import modele.*;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class AfficherCapteursui extends JFrame {
@@ -50,3 +51,4 @@ public class AfficherCapteursui extends JFrame {
     }
 
 }
+

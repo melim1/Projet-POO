@@ -65,6 +65,9 @@ public class MainFrame extends JFrame {
         btnTousCapteur.addActionListener(e -> {
             new AfficherCapteursui(hopital);
         });
+        btnQuitter.addActionListener(e -> {
+            System.exit(0);
+        });
 
     }
 
