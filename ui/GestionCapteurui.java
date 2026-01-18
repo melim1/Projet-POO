@@ -4,6 +4,8 @@ package ui;
 import modele.*;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class GestionCapteurui extends JFrame {
     private Hopital hopital;
@@ -89,11 +91,52 @@ public class GestionCapteurui extends JFrame {
                             c = null;
                     }
 
-                    // 5️⃣ Ajouter au hopital
-                    if (c != null) {
-                        hopital.ajouterCapteur(c);
-                        JOptionPane.showMessageDialog(this, "Capteur ajouté : " + nom + " (ID: " + id + ")");
+                    int avecAbo = JOptionPane.showConfirmDialog(
+                            this,
+                            "Ajouter un abonnement ?",
+                            "Abonnement",
+                            JOptionPane.YES_NO_OPTION
+                    );
+                    if (avecAbo == JOptionPane.YES_OPTION) {
+
+                        String[] typesAbo = {"Mensuel", "Annuel"};
+                        String typeAbo = (String) JOptionPane.showInputDialog(
+                                this,
+                                "Type d'abonnement :",
+                                "Abonnement",
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,
+                                typesAbo,
+                                typesAbo[0]
+                        );
+
+                        if (typeAbo != null) {
+                            LocalDate dateDebut = LocalDate.now();
+                            LocalDate dateFin = typeAbo.equals("Mensuel")
+                                    ? dateDebut.plusMonths(1)
+                                    : dateDebut.plusYears(1);
+
+                            DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+                            Abonnement abonnement = new Abonnement(
+                                    typeAbo,
+                                    dateDebut.format(FORMAT),
+                                    dateFin.format(FORMAT)
+                            );
+
+                            c.setAbonnement(abonnement);
+                        }
                     }
+                    hopital.ajouterCapteur(c);
+                    hopital.sauvegarder("capteurs.dat");
+
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Capteur ajouté avec succès ✔",
+                            "Succès",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+
                 }
             }
         });
