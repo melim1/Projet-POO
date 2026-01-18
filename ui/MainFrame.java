@@ -69,6 +69,30 @@ public class MainFrame extends JFrame {
             System.exit(0);
         });
 
+        btnExpires.addActionListener(e -> {
+            StringBuilder listeExpires = new StringBuilder();
+            boolean alerteTrouvee = false;
+
+            
+            for (CapteurConnecte c : hopital.getCapteurs()) {
+        
+                 
+                if (c.getAbonnement() != null && !c.getAbonnement().estValide()) {
+                    listeExpires.append("• ").append(c.getNom()).append(" (Fin le : ").append(c.getAbonnement().getDateFin()).append(")\n");
+                    alerteTrouvee = true;
+                 }
+            }
+
+            if (alerteTrouvee) {
+                
+                JOptionPane.showMessageDialog(this, "⚠️ ATTENTION : Les abonnements suivants sont expirés :\n\n" + listeExpires.toString(),"Capteurs Expirés", JOptionPane.WARNING_MESSAGE);
+            } 
+            else {
+                
+                JOptionPane.showMessageDialog(this, "Tous les abonnements sont valides ! ✅");
+            }
+        });
+
     }
 
 }
