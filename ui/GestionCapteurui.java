@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class GestionCapteurui extends JFrame {
     private Hopital hopital;
     private CapteurConnecte capteurConnecte;
-    private GestionCapteurs gestionCapteurs;
+
     private GestionAlarmes gestionAlarmes;
     public GestionCapteurui(Hopital hopital){
         this.hopital=hopital;
@@ -142,26 +142,26 @@ public class GestionCapteurui extends JFrame {
         });
 
         btnModifier.addActionListener( e ->{
-            gestionCapteurs.modifierCapteurSwing(hopital);
+            GestionCapteurs.modifierCapteurSwing(hopital);
 
         });
         btnSupprimer.addActionListener( e ->{
-            gestionCapteurs.supprimerCapteurSwing(hopital);
+            GestionCapteurs.supprimerCapteurSwing(hopital);
         });
         btnMesurer.addActionListener(e -> {
-            gestionCapteurs.mesurerTousLesCapteursSwing(hopital,gestionAlarmes);
+            GestionCapteurs.mesurerTousLesCapteursSwing(hopital,gestionAlarmes);
         });
         btnRechercher.addActionListener( e -> {
-            gestionCapteurs.rechercherCapteurSwing(hopital);
+            GestionCapteurs.rechercherCapteurSwing(hopital);
         });
         btnFiltrer.addActionListener(e ->{
-            gestionCapteurs.filtrerParTypeSwing(hopital);
+            GestionCapteurs.filtrerParTypeSwing(hopital);
         });
         btnAfficher.addActionListener(e ->{
-            gestionCapteurs.afficherCapteursNonAbonnesSwing(hopital);
+            GestionCapteurs.afficherCapteursNonAbonnesSwing(hopital);
         });
         btnStat.addActionListener(e ->{
-            gestionCapteurs.afficherStatistiquesSwing(hopital);
+            GestionCapteurs.afficherStatistiquesSwing(hopital);
         });
 
         setVisible(true);
