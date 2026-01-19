@@ -1,7 +1,7 @@
 ID;Nom;Abonne;Valeur;Informations
-C1;bl2;false;92.68391717682923;C1   bl2 (abonné=false) [Poids=92,7 kg]
-C2;GL1;true;1.1264335606556908;Glucomètre [C2] - GL1 | Glycémie : 1,13 g/L
-C2;GL1;true;1.1264335606556908;Glucomètre [C2] - GL1 | Glycémie : 1,13 g/L
-C4;h1;false;45.0;Holter ECG [C4] - h1 | Fréquence cardiaque : 45 bpm
-C5;oxy;true;90.08222599812112;C5   oxy (abonné=true) [SpO2=90,1%]
-C6;TN1;false;120.51114118913225;C6   TN1 (abonné=false)[Tension=120,5/79,3]
+C1;bl2;false;55.21377464147944;C1   bl2 (abonné=false) [Poids=55,2 kg]
+C2;GL1;true;1.8681233956080292;Glucomètre [C2] - GL1 | Glycémie : 1,87 g/L
+C2;GL1;true;1.8681233956080292;Glucomètre [C2] - GL1 | Glycémie : 1,87 g/L
+C4;h1;false;117.0;Holter ECG [C4] - h1 | Fréquence cardiaque : 117 bpm
+C5;oxy;true;92.31215156900795;C5   oxy (abonné=true) [SpO2=92,3%]
+C6;TN1;false;106.72981052277376;C6   TN1 (abonné=false)[Tension=106,7/73,6]

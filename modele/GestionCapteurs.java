@@ -1,5 +1,7 @@
 package modele;
 
+import ui.GestionAlarmesui;
+
 import javax.swing.*;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -270,36 +272,67 @@ public class GestionCapteurs {
 
         // 1️⃣ Mesure
         hopital.mesurerTousLesCapteurs();
-        afficherAlertesSwing(hopital);
 
         // 2️⃣ Création des alarmes
         gestionAlarmes.verifierEtCreerAlarmes(hopital);
+        gestionAlarmes.sauvegarder();
+
+
 
         // 3️⃣ Sauvegardes
         hopital.sauvegarder("capteurs.dat");
         hopital.exporterCSV("capteurs.csv");
 
-        // 4️⃣ Statistiques
-        int total = hopital.getCapteurs().size();
+        // 4️⃣ Construire le message complet pour la popup
+        StringBuilder message = new StringBuilder();
         int alertes = 0;
 
         for (CapteurConnecte c : hopital.getCapteurs()) {
+            message.append("Capteur ").append(c.getNom())
+                    .append(" (ID: ").append(c.getId()).append(")\n")
+                    .append("Valeur : ").append(String.format("%.2f", c.getValeur())).append("\n");
+
             if (c.verifierAlerte()) {
+                message.append("⚠️ ALERTE : ").append(determinerMessageAlerte(c)).append("\n");
                 alertes++;
+            } else {
+                message.append("✔ État normal\n");
             }
+
+            message.append("------------------------\n");
         }
 
-        // 5️⃣ Affichage Swing
+        // 5️⃣ Ajouter résumé général
+        message.append("\nTotal capteurs : ").append(hopital.getCapteurs().size())
+                .append("\nCapteurs en alerte : ").append(alertes)
+                .append("\nCSV exporté : capteurs.csv");
+
+        // 6️⃣ Affichage popup
         JOptionPane.showMessageDialog(
                 null,
-                "Mesure terminée ✔\n\n"
-                        + "Total capteurs : " + total + "\n"
-                        + "Capteurs en alerte : " + alertes + "\n"
-                        + "CSV exporté : capteurs.csv",
-                "Mesure",
+                message.toString(),
+                "Mesure des capteurs",
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
+    public static String determinerMessageAlerte(CapteurConnecte c) {
+        if (c instanceof Balance) {
+            return c.getValeur() < 45 ? "Poids trop faible" : "Poids trop élevé";
+        } else if (c instanceof Oxymetre) {
+            return "Saturation oxygène faible";
+        } else if (c instanceof Pilulier) {
+            return "Doses épuisées";
+        } else if (c instanceof Tensiometre) {
+            return "Tension anormale";
+        } else if (c instanceof Glucometre) {
+            return c.getValeur() < 0.70 ? "Hypoglycémie" : "Hyperglycémie";
+        } else if (c instanceof Holter_ECG) {
+            return c.getValeur() < 50 ? "Bradycardie" : "Tachycardie";
+        }
+        return "Alerte générique";
+    }
+
+
 
     // ===== RECHERCHER UN CAPTEUR =====
     private static void rechercherCapteur(Scanner sc, Hopital hopital) {

@@ -12,7 +12,9 @@ public class Alarme implements Serializable {
     private String typeAlarme;
     private double valeur;
     private String dateHeure;
-    private boolean traitee;  // AJOUTÉ
+    private boolean traitee;
+    private CapteurConnecte capteur;
+// AJOUTÉ
 
     public Alarme(String idCapteur, String nomCapteur, String typeAlarme, double valeur) {
         this.idCapteur = idCapteur;
@@ -37,6 +39,7 @@ public class Alarme implements Serializable {
     public double getValeur() { return valeur; }
     public String getDateHeure() { return dateHeure; }
     public boolean estTraitee() { return traitee; }  // AJOUTÉ
+    public CapteurConnecte getCapteur() { return capteur; }
 
     @Override
     public String toString() {

@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+import static modele.GestionCapteurs.determinerMessageAlerte;
+
 public class GestionAlarmesui extends JFrame {
 
     private GestionAlarmes gestionAlarmes;
@@ -89,6 +91,9 @@ public class GestionAlarmesui extends JFrame {
 
         // ====== Affichage initial ======
         afficherToutes();
+        // Charger les alarmes existantes
+        gestionAlarmes.charger();
+
 
         setVisible(true);
     }
@@ -112,4 +117,19 @@ public class GestionAlarmesui extends JFrame {
             }
         }
     }
+    public void rafraichir() {
+        modelAlarmes.clear();
+        for (Alarme a : gestionAlarmes.getHistorique()) {
+            String message = a.toString();
+
+            // Si tu veux ajouter le message d’alerte lié au capteur
+            CapteurConnecte c = a.getCapteur();
+            if (c != null && c.verifierAlerte()) {
+                message += " - ⚠️ " + determinerMessageAlerte(c);
+            }
+
+            modelAlarmes.addElement(message);
+        }
+    }
+
 }

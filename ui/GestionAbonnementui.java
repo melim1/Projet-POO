@@ -14,6 +14,7 @@ public class GestionAbonnementui extends JFrame {
         setSize(500,400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new java.awt.GridLayout(4, 1, 10, 10));
+        setLocationRelativeTo(null);
         setVisible(true);
 
         JButton btnAfficher = new JButton("Afficher tous les abonnements");

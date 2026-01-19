@@ -11,6 +11,7 @@ public class GestionCapteurui extends JFrame {
     private Hopital hopital;
     private CapteurConnecte capteurConnecte;
 
+
     private GestionAlarmes gestionAlarmes;
     public GestionCapteurui(Hopital hopital){
         this.hopital=hopital;
