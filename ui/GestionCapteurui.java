@@ -20,7 +20,7 @@ public class GestionCapteurui extends JFrame {
         setSize(400,500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new java.awt.GridLayout(9, 1, 10, 10));
+        setLayout(new java.awt.GridLayout(8, 1, 10, 10));
 
         JButton btnAjouter = new JButton("Ajouter un capteur");
         JButton btnModifier = new JButton("Modifier un capteur ");
@@ -28,7 +28,7 @@ public class GestionCapteurui extends JFrame {
         JButton btnMesurer = new JButton("Mesurer tous les capteurs ");
         JButton btnRechercher = new JButton("Rechercher un capteur ");
         JButton btnFiltrer = new JButton("Filtrer les capteurs par type");
-        JButton btnAfficher = new JButton("Afficher les capteurs non abonnés ");
+
         JButton btnStat = new JButton("Statistiques des capteurs ");
         JButton btnRetour = new JButton("Retour au menu principal");
 
@@ -38,7 +38,7 @@ public class GestionCapteurui extends JFrame {
         add(btnMesurer);
         add(btnRechercher);
         add(btnFiltrer);
-        add(btnAfficher);
+
         add(btnStat);
         add(btnRetour);
 
@@ -158,9 +158,7 @@ public class GestionCapteurui extends JFrame {
         btnFiltrer.addActionListener(e ->{
             GestionCapteurs.filtrerParTypeSwing(hopital);
         });
-        btnAfficher.addActionListener(e ->{
-            GestionCapteurs.afficherCapteursNonAbonnesSwing(hopital);
-        });
+
         btnStat.addActionListener(e ->{
             GestionCapteurs.afficherStatistiquesSwing(hopital);
         });

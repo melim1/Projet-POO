@@ -228,5 +228,34 @@ public class GestionAbonnement {
             JOptionPane.showMessageDialog(null, "Abonnement désactivé !");
         }
     }
+    // afficher sans abonnement pour swing
+    public static void afficherCapteursNonAbonnesSwing(Hopital hopital) {
+
+        StringBuilder resultat = new StringBuilder();
+        boolean trouve = false;
+
+        for (CapteurConnecte c : hopital.getCapteurs()) {
+            if (!c.estAbonne()) {
+                resultat.append(c.toString()).append("\n");
+                trouve = true;
+            }
+        }
+
+        if (!trouve) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Tous les capteurs sont abonnés ✔",
+                    "Capteurs non abonnés",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    resultat.toString(),
+                    "Capteurs non abonnés",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }
+    }
 
 }
